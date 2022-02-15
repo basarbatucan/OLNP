@@ -6,5 +6,5 @@ Thanks!
 Basarbatu Can
 
 # References
-[1] Gasso, Gilles, et al. "Batch and online learning algorithms for nonconvex Neyman-Pearson classification." ACM transactions on intelligent systems and technology (TIST) 2.3 (2011): 1-19.
+[1] Gasso, Gilles, et al. "Batch and online learning algorithms for nonconvex Neyman-Pearson classification." ACM transactions on intelligent systems and technology (TIST) 2.3 (2011): 1-19. <br/>
 [2] Can, Basarbatu, and Huseyin Ozkan. "A Neural Network Approach for Online Nonlinear Neyman-Pearson Classification." IEEE Access 8 (2020): 210234-210250.
