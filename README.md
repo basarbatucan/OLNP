@@ -1,4 +1,4 @@
-# A Neural Network Approach for Online Nonlinear Neyman-Pearson Classification
+# Online Linear Neyman-Pearson Classification
 This is the repository for Online Neyman Pearson (NP) Classifier described in [1]: https://dl.acm.org/doi/pdf/10.1145/1961189.1961200?casa_token=wkfMmSngkWAAAAAA:WwjFomI3GmEUVX8uYJ03C4252X6xGW6wB0tCFBkVk6X_aS7CZXUgiEE4RS3BSMiwWiShPjfNsxprTAk.<br/>
 The only difference within the implementation is is the estimation of FPR of the perceptron in the training phase. Similar approach is also used in [2].<br/>
 
