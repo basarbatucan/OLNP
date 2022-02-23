@@ -75,9 +75,13 @@ classdef utility_functions
         end
         
         % plot_decision_boundaries OLNP
-        function plot_decision_boundary(w, b, x, y)
+        function plot_decision_boundary(model, x, y)
             
             figure();
+            
+            w = model.w_;
+            b = model.b_;
+            tfpr = model.tfpr_;
             
             numPtsInGrid = 100;
             x1_min = min(x(:,1));
@@ -139,7 +143,8 @@ classdef utility_functions
             new_legend = hLegend.String;
             new_legend{length(new_legend)} = 'Decision Boundary';
             legend(new_legend);
-
+            title(['Target False Alarm: ', num2str(tfpr)]);
+            
         end
         
         % get all parameters and generate hyperparameter space

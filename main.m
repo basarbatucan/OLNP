@@ -9,7 +9,7 @@ test_size = 0.15;
 augmentation_size = 150e3;
 test_repeat = 100;
 cross_val_MC = 8;
-tfpr = 0.05;
+tfpr = 0.2;
 
 % Define model hyper-parameter space
 hyperparams.eta_init = [0.01, 0.1, 0.5];
@@ -116,3 +116,8 @@ model = model.train(X_train, y_train, X_test, y_test, 100);
 
 % plot the results
 model.plot_results();
+
+% plot decision boundaries
+if n_features == 2
+    utility_functions.plot_decision_boundary(model, X_test, y_test)
+end

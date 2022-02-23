@@ -6,6 +6,10 @@ classdef OLNP
         tfpr_
         n_features_
         
+        % parameters
+        w_
+        b_
+        
         % hyperparameters
         eta_init_
         beta_init_
@@ -223,6 +227,10 @@ classdef OLNP
                 beta = beta_init/(1+lambda*(number_of_positive_samples + number_of_negative_samples));
 
             end
+            
+            % save calculated parameters
+            obj.w_ = w;
+            obj.b_ = b;
             
             % save the results
             obj.tpr_train_array_ = tpr_train_array;
