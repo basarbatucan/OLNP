@@ -5,10 +5,10 @@ The only difference within the implementation is is the estimation of FPR of the
 # Running The Code
 * "main." is the main function for running OLNP.
 * OLNP is an NP classifier therefore it is optimized for a selected false alarm rate.
-* List of different false alarms are given in the main function. Using can select any of these false alarms as target false alarm by changing the target false alarm index.
-* Once the code is completed, Training and testing phases related graphs are generated.
-* Selected hyperparameters and generated outputs are saved under output.
-* Note that there should be additional folder with the same name as your input data file for saving the output. (e.g banana.mat, ./output/banana.mat)
+* List of different false alarms are given in "main.m". User can select any of these false alarms as target false alarm by changing the target false alarm index.
+* Once the code execution is completed, training and testing phases related graphs are generated.
+* Selected hyperparameters and generated outputs are saved under output directory.
+* Note that there should be additional folder with the same name as your input data file for saving the output. (e.g ./data/banana.mat, ./output/banana.mat)
 
 # Hyperparameter Tuning
 * "single_experiment.m" file optimizes model for a given set of hyperparameter set and target false alarm.

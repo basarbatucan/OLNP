@@ -7,9 +7,14 @@ function model = single_experiment(tfpr, data_name, test_repeat, optimized_param
 	augmentation_size = 150e3;
 	cross_val_MC = 8;
 
+    % Read Data
+	data = load(input_data_dir);
+	[X_train, X_val, X_test, y_train, y_val, y_test] = utility_functions.train_val_test_split(data.x, data.y, val_size, test_size);
+	n_features = size(X_train, 2);
+    
 	% Define model hyper-parameter space
-	hyperparams.eta_init = [0.01, 0.1, 0.5];
-	hyperparams.beta_init = 100;
+	hyperparams.eta_init = 0.01;
+	hyperparams.beta_init = [1e2, 1e3];
 	hyperparams.gamma = 1;
 	hyperparams.sigmoid_h = -1;
 	hyperparams.lambda = 0;
@@ -18,12 +23,7 @@ function model = single_experiment(tfpr, data_name, test_repeat, optimized_param
 	hyperparam_space = utility_functions.generate_hyperparameter_space_OLNP(hyperparams);
 	hyperparam_number = length(hyperparam_space);
 	cross_val_scores = zeros(cross_val_MC, hyperparam_number);
-
-	% Read Data
-	data = load(input_data_dir);
-	[X_train, X_val, X_test, y_train, y_val, y_test] = utility_functions.train_val_test_split(data.x, data.y, val_size, test_size);
-	n_features = size(X_train, 2);
-
+    
     % cross validation
     if isempty(optimized_params)
         
@@ -42,7 +42,9 @@ function model = single_experiment(tfpr, data_name, test_repeat, optimized_param
             end
 
             % compare cross validations
+            fprintf('Hyperparameter space size: %d\n', length(hyperparam_space));
             for i=1:length(hyperparam_space)
+                tuning_tstart = tic;
                 parfor j=1:cross_val_MC
 
                     eta_init = hyperparam_space{i}.eta_init;
@@ -67,6 +69,8 @@ function model = single_experiment(tfpr, data_name, test_repeat, optimized_param
                     cross_val_scores(j,i) = NP_score;
 
                 end
+                tuning_tend = toc(tuning_tstart);
+                fprintf('Time elapsed for testing hyperparameter set %d: %.3f\n', i, tuning_tend);
             end
 
             % make decision based on mean of the NP scores
