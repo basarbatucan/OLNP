@@ -14,7 +14,7 @@ function model = single_experiment(tfpr, data_name, test_repeat, optimized_param
     
 	% Define model hyper-parameter space
 	hyperparams.eta_init = 0.01;
-	hyperparams.beta_init = [1e2, 1e3];
+	hyperparams.beta_init = [1e2];
 	hyperparams.gamma = 1;
 	hyperparams.sigmoid_h = -1;
 	hyperparams.lambda = 0;
