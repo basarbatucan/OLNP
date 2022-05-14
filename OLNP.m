@@ -24,6 +24,7 @@ classdef OLNP
         fpr_test_array_
         neg_class_weight_train_array_
         pos_class_weight_train_array_
+        test_indices_
         
     end
     
@@ -79,10 +80,10 @@ classdef OLNP
             % init accumulators
             tp = 0;
             fp = 0;
-            test_i = linspace(1, n_samples_train, test_repeat+1);
-            test_i=round(test_i(2:end));
+            test_i = logspace(1, log10(n_samples_train), test_repeat+1);
+            test_i = round(test_i(2:end));
             current_test_i = 1;
-
+            
             % array outputs
             tpr_test_array = zeros(1, test_repeat);
             fpr_test_array = zeros(1, test_repeat);
@@ -241,28 +242,36 @@ classdef OLNP
             obj.fpr_test_array_ = fpr_test_array;
             obj.neg_class_weight_train_array_ = neg_class_weight_train_array;
             obj.pos_class_weight_train_array_ = pos_class_weight_train_array;
+            obj.test_indices_ = test_i;
             
         end
         
         function plot_results(obj)
             
-            subplot(2,2,1)
+            subplot(2,3,1)
             plot(obj.tpr_train_array_, 'LineWidth', 2);grid on;
             xlabel('Number of Training Samples');
             ylabel('Train TPR');
 
-            subplot(2,2,2)
+            subplot(2,3,2)
             plot(obj.fpr_train_array_, 'LineWidth', 2);grid on;
             xlabel('Number of Training Samples');
             ylabel('Train FPR');
 
-            subplot(2,2,3)
-            plot(obj.tpr_test_array_, 'LineWidth', 2);grid on;
+            subplot(2,3,3)
+            plot(obj.neg_class_weight_train_array_, 'LineWidth', 2);grid on;hold on;
+            plot(obj.pos_class_weight_train_array_, 'LineWidth', 2);
+            xlabel('Number of Training Samples');
+            ylabel('Class weights');
+            legend({'Neg class weight', 'Pos class weight'});
+            
+            subplot(2,3,4)
+            semilogx(obj.test_indices_, obj.tpr_test_array_, 'LineWidth', 2);grid on;
             xlabel('Number of Tests');
             ylabel('Test TPR');
 
-            subplot(2,2,4)
-            plot(obj.fpr_test_array_, 'LineWidth', 2);grid on;
+            subplot(2,3,5)
+            plot(obj.test_indices_, obj.fpr_test_array_, 'LineWidth', 2);grid on;
             xlabel('Number of Tests');
             ylabel('Test FPR');
             

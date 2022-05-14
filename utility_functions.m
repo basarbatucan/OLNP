@@ -50,6 +50,8 @@ classdef utility_functions
                     augmented_x(start_i:end_i, :) = x(shuffle_i, :);
                     augmented_y(start_i:end_i, :) = y(shuffle_i, :);
                 end
+                augmented_x = augmented_x(1:augmentation_size,:);
+                augmented_y = augmented_y(1:augmentation_size);
             else
                 % no concat
                 augmented_x = x;

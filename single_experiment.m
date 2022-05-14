@@ -4,7 +4,7 @@ function model = single_experiment(tfpr, data_name, test_repeat, optimized_param
 	input_data_dir = ['./data/',data_name,'.mat'];
 	val_size = 0.15;
 	test_size = 0.15;
-	augmentation_size = 150e3;
+	augmentation_size = 150000;
 	cross_val_MC = 8;
 
     % Read Data
@@ -13,12 +13,12 @@ function model = single_experiment(tfpr, data_name, test_repeat, optimized_param
 	n_features = size(X_train, 2);
     
 	% Define model hyper-parameter space
-	hyperparams.eta_init = 0.01;
-	hyperparams.beta_init = [1e2];
+	hyperparams.eta_init = [0.0001];
+	hyperparams.beta_init = [200];
 	hyperparams.gamma = 1;
 	hyperparams.sigmoid_h = -1;
-	hyperparams.lambda = 0;
-
+	hyperparams.lambda = 1e-7;
+    
 	% generate hyper-parameter space 
 	hyperparam_space = utility_functions.generate_hyperparameter_space_OLNP(hyperparams);
 	hyperparam_number = length(hyperparam_space);
